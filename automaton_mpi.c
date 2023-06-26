@@ -426,17 +426,33 @@ void printTimeSpent(clock_t *myBegin, int rank, int iteration, int task, double 
     time_iteration = (double)(myEnd - *myBegin) / CLOCKS_PER_SEC;
 
     if ((PERFORMANCE_MODE == 2 && rank == 0) || (PERFORMANCE_MODE == 3 && iteration == (ITERATIONS-1) && rank == 0) || PERFORMANCE_MODE == 1) {
-        switch (task) {
-                case 0:
-                    if (rank == 0) printf("Iteracion %5d: \033[31mMASTER\033[0m   (%2d), tardo %11lf segundos en dividir la grilla.\n", iteration+1, rank, time_iteration);
-                    ; break;
-                case 1:
-                    printf("Iteracion %5d: El proceso %2d, tardo %11lf segundos en aplicar reglas a sus filas.\n", iteration+1, rank, time_iteration);
-                    ; break;
-                case 2:
-                    if (rank == 0) printf("Iteracion %5d: \033[31mMASTER\033[0m   (%2d), tardo %11lf segundos en actualizar la grilla.\n", iteration+1, rank, time_iteration);
-                    ; break;
-                default: break;
+        if (CLUSTER) {
+            switch (task) {
+                    case 0:
+                        if (rank == 0) printf("Iteracion %5d: MASTER   (%2d), tardo %11lf segundos en dividir la grilla.\n", iteration+1, rank, time_iteration);
+                        ; break;
+                    case 1:
+                        printf("Iteracion %5d: El proceso %2d, tardo %11lf segundos en aplicar reglas a sus filas.\n", iteration+1, rank, time_iteration);
+                        ; break;
+                    case 2:
+                        if (rank == 0) printf("Iteracion %5d: MASTER   (%2d), tardo %11lf segundos en actualizar la grilla.\n", iteration+1, rank, time_iteration);
+                        ; break;
+                    default: break;
+                }
+            //if (iteration == (ITERATIONS - 1) && task == 2 && rank == 0) printf("\033[32mTiempo de Ejecucion Total: %lf segundos.\n\033[0m", *time_spent);
+        } else {
+            switch (task) {
+                    case 0:
+                        if (rank == 0) printf("Iteracion %5d: \033[31mMASTER\033[0m   (%2d), tardo %11lf segundos en dividir la grilla.\n", iteration+1, rank, time_iteration);
+                        ; break;
+                    case 1:
+                        printf("Iteracion %5d: El proceso %2d, tardo %11lf segundos en aplicar reglas a sus filas.\n", iteration+1, rank, time_iteration);
+                        ; break;
+                    case 2:
+                        if (rank == 0) printf("Iteracion %5d: \033[31mMASTER\033[0m   (%2d), tardo %11lf segundos en actualizar la grilla.\n", iteration+1, rank, time_iteration);
+                        ; break;
+                    default: break;
+                }
             }
         //if (iteration == (ITERATIONS - 1) && task == 2 && rank == 0) printf("\033[32mTiempo de Ejecucion Total: %lf segundos.\n\033[0m", *time_spent);
     }

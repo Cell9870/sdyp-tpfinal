@@ -15,9 +15,9 @@ typedef struct {
 // Número de iteraciones 
 #define ITERATIONS 100
 // Cantidad de columnas en la grilla (columns)
-#define WIDTH 100
+#define WIDTH 1000
 // Cantidad de filas en la grilla (rows)
-#define HEIGHT 100
+#define HEIGHT 1000
 
 // Rango de Moore
 #define MOORE_RANGE 2
@@ -29,6 +29,8 @@ typedef struct {
 #define RANDOMNESS 1
 // Tipo de inicializacion de grilla: 1 = RANDOM, 2 = HOT CENTER, 3 = COLD CENTER, 4 = COLD VS HOT BLOPS
 #define INIT_TYPE 1
+// Ejecucion en cluster
+#define CLUSTER 1
 
 void initGrid(Node**);
 void applyRulesGrid(Node**, Node**, int, int, int, int[]);
