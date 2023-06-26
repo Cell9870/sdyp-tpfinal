@@ -13,7 +13,7 @@ typedef struct {
 // 0: No mostrar ayudas, 1: Activar comentarios.
 #define DEV_MODE 0
 // Número de iteraciones 
-#define ITERATIONS 100
+#define ITERATIONS 10
 // Cantidad de columnas en la grilla (columns)
 #define WIDTH 1000
 // Cantidad de filas en la grilla (rows)

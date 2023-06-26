@@ -18,6 +18,12 @@ int main (int argc, char** argv) {
     MPI_Comm_size(MPI_COMM_WORLD, &size);
     MPI_Comm_rank(MPI_COMM_WORLD, &rank);
     
+    time_t time_spent2;
+
+    if (rank == 0) {
+        time(&time_spent2);
+    }
+
     double time_spent = 0.0;
     clock_t myBegin = clock();
 
@@ -48,10 +54,10 @@ int main (int argc, char** argv) {
     while(iteration < ITERATIONS) {
         if (rank == 0 && !PERFORMANCE_MODE && !DEV_MODE) {
             printf("Ciclo %d.\n", iteration+1);
-            if (iteration < 3) {
-                fflush(stdin);
-                getchar();
-            }
+        //    if (iteration < 3) {
+        //        fflush(stdin);
+        //        getchar();
+        //    }
         }
         MPI_Barrier(MPI_COMM_WORLD);
         
@@ -83,6 +89,13 @@ int main (int argc, char** argv) {
     free(gridAux);
     
     MPI_Type_free(&mpi_node_type);
+
+    if (rank == 0) {
+        time_t time_end;
+        time(&time_end);
+        printf("\033[32mTiempo de Ejecucion Total Con Time: %ld segundos.\n\033[0m", (time_end - time_spent2));
+    }
+
     MPI_Finalize();
 
     return 0;
