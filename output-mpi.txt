@@ -1,0 +1,5 @@
+Iteracion   100: [31mMASTER[0m   ( 0), tardo    0.000097 segundos en dividir la grilla.
+Iteracion   100: El proceso  0, tardo    0.011475 segundos en aplicar reglas a sus filas.
+Iteracion   100: [31mMASTER[0m   ( 0), tardo    0.000106 segundos en actualizar la grilla.
+[32mTiempo de Ejecucion Total: 1.154346 segundos.
+[0m
