@@ -9,7 +9,7 @@ typedef struct {
 
 
 // 0: Mostrar grilla; 1: No mostrar grilla, mostrar timings; 2: Solo timings de MASTER; 3: Solo timings iteracion final de MASTER
-#define PERFORMANCE_MODE 3
+#define PERFORMANCE_MODE 0
 // 0: No mostrar ayudas, 1: Activar comentarios.
 #define DEV_MODE 0
 // Número de iteraciones 
@@ -30,7 +30,7 @@ typedef struct {
 // Tipo de inicializacion de grilla: 1 = RANDOM, 2 = HOT CENTER, 3 = COLD CENTER, 4 = COLD VS HOT BLOPS
 #define INIT_TYPE 1
 // Ejecucion en cluster
-#define CLUSTER 1
+#define CLUSTER 0
 
 void initGrid(Node**);
 void applyRulesGrid(Node**, Node**, int, int, int, int[]);

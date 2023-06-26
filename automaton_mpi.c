@@ -401,15 +401,15 @@ void showGrid(Node **grid) {
     for (int i = 0; i < (HEIGHT > 35 ? 35 : HEIGHT) ; i++) {
         for (int j = 0; j < (WIDTH > 35 ? 35 : WIDTH); j++) {
             if (-272 <= grid[i][j].temperature && grid[i][j].temperature < -163) // LIGHT CYAN  [-272,-163)
-                printf("\033[96m%c \033[0m", (char)254u);
+                printf("\033[96m%c \033[0m", (char)'0');
             else if (-163 <= grid[i][j].temperature && grid[i][j].temperature < -54) // BLUE [-163,-54)
-                printf("\033[34m%c \033[0m", (char)254u);
+                printf("\033[34m%c \033[0m", (char)'0');
             else if (-54 <= grid[i][j].temperature && grid[i][j].temperature < 55) // WHITE [-54, 55)
-                printf("\033[97m%c \033[0m", (char)254u);
+                printf("\033[97m%c \033[0m", (char)'0');
             else if (55 <= grid[i][j].temperature && grid[i][j].temperature < 164) //LIGH RED / ORANGE [55, 164)
-                printf("\033[91m%c \033[0m", (char)254u);
+                printf("\033[91m%c \033[0m", (char)'0');
             else if (164 <= grid[i][j].temperature && grid[i][j].temperature <= 272) //RED [164, 272]
-                printf("\033[31m%c \033[0m", (char)254u);
+                printf("\033[31m%c \033[0m", (char)'0');
             else {
                 printf("!!!"); 
                 exit(0);
