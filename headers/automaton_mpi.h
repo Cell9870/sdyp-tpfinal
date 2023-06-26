@@ -15,9 +15,9 @@ typedef struct {
 // Número de iteraciones 
 #define ITERATIONS 100
 // Cantidad de columnas en la grilla (columns)
-#define WIDTH 1000
+#define WIDTH 100
 // Cantidad de filas en la grilla (rows)
-#define HEIGHT 1000
+#define HEIGHT 100
 
 // Rango de Moore
 #define MOORE_RANGE 2

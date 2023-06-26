@@ -5,7 +5,7 @@
 #include <time.h>
 
 #include <mpi.h>
-#include <windows.h>
+//#include <windows.h>
 
 #define DIV_ROUND_CLOSEST(n, d) ((((n) < 0) == ((d) < 0)) ? (((n) + (d)/2)/(d)) : (((n) - (d)/2)/(d)))
 
