@@ -75,11 +75,11 @@ int main (int argc, char** argv) {
 
     clock_t myEnd = clock();
     time_spent_clock += (double)(myEnd - myBegin) / CLOCKS_PER_SEC;
-    if (rank == 0) printf("\033[32mTiempo de Ejecucion Total: %lf segundos.\n\033[0m", time_spent_clock);
+    if (rank == 0) printf("Tiempo de Ejecucion Total: %lf segundos.\n", time_spent_clock);
     if (rank == 0) {
         time_t time_end;
         time(&time_end);
-        printf("\033[32mTiempo de Ejecucion Total Con Time: %ld segundos.\n\033[0m", (time_end - time_spent_seconds));
+        printf("Tiempo de Ejecucion Total Con Time: %ld segundos.\n", (time_end - time_spent_seconds));
     }
     for (int i = 0; i < HEIGHT; i++)
         free(grid[i]);
