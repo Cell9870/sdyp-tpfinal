@@ -8,12 +8,12 @@ typedef struct {
 } Node;
 
 
-// 0: Mostrar grilla; 1: No mostrar grilla, mostrar timings; 2: Solo timings de MASTER; 3: Solo timings iteracion final de MASTER
-#define PERFORMANCE_MODE 3
+// 0: Mostrar grilla; 1: No mostrar grilla, mostrar timings; 2: Solo timings de MASTER; 3: Solo timings iteracion final de MASTER; 4: No mostrar timings
+#define PERFORMANCE_MODE 4
 // 0: No mostrar ayudas, 1: Activar comentarios.
 #define DEV_MODE 0
 // Número de iteraciones 
-#define ITERATIONS 100
+#define ITERATIONS 1
 // Cantidad de columnas en la grilla (columns)
 #define WIDTH 1000
 // Cantidad de filas en la grilla (rows)

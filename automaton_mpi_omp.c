@@ -51,23 +51,23 @@ int main (int argc, char** argv) {
     while(iteration < ITERATIONS) {
         if (rank == 0 && !PERFORMANCE_MODE && !DEV_MODE) {
             printf("Ciclo %d.\n", iteration+1);
-            if (iteration < 3) {
+            /*if (iteration < 3) {
                 fflush(stdin);
                 getchar();
-            }
+            }*/
         }
         MPI_Barrier(MPI_COMM_WORLD);
         
         divideAndSendGrid(grid, rank, size, mpi_node_type, myRows, myRange, gridAux);
-        if (PERFORMANCE_MODE) printTimeSpent(&myBegin, rank, iteration, 0, &time_spent_clock);
+        if (0 < PERFORMANCE_MODE && PERFORMANCE_MODE < 4) printTimeSpent(&myBegin, rank, iteration, 0, &time_spent_clock);
         MPI_Barrier(MPI_COMM_WORLD);
 
         applyRulesGrid(grid, gridAux, rank, size, myRows, myRange);
-        if (PERFORMANCE_MODE) printTimeSpent(&myBegin, rank, iteration, 1, &time_spent_clock);
+        if (0 < PERFORMANCE_MODE && PERFORMANCE_MODE < 4) printTimeSpent(&myBegin, rank, iteration, 1, &time_spent_clock);
         MPI_Barrier(MPI_COMM_WORLD);
         
         updateGrid(grid, gridAux, rank, size, myRows, myRange, mpi_node_type);
-        if (PERFORMANCE_MODE) printTimeSpent(&myBegin, rank, iteration, 2, &time_spent_clock);
+        if (0 < PERFORMANCE_MODE && PERFORMANCE_MODE < 4) printTimeSpent(&myBegin, rank, iteration, 2, &time_spent_clock);
         MPI_Barrier(MPI_COMM_WORLD);
         if (!DEV_MODE && !PERFORMANCE_MODE && rank == 0) showGrid(grid);
         iteration++;
