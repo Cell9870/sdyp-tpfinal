@@ -6,15 +6,15 @@ typedef struct {
 } Node;
 
 // 1: No mostrar grilla, 0: Mostrar grilla.
-#define PERFORMANCE_MODE 0
+#define PERFORMANCE_MODE 1
 // 1: Activar comentarios, 0: No mostrar ayudas.
 #define DEV_MODE 0
 // Número de iteraciones 
-#define ITERATIONS 10000
+#define ITERATIONS 1
 // Cantidad de columnas en la grilla (columns)
-#define WIDTH 35
+#define WIDTH 1000
 // Cantidad de filas en la grilla (rows)
-#define HEIGHT 35
+#define HEIGHT 1000
 
 // Rango de Moore
 #define MOORE_RANGE 2   
@@ -23,9 +23,9 @@ typedef struct {
 // Factor de crecimiento
 #define GROWTH_FACTOR 1
 // Factor de aleatoridad: 0 = No ruleB, and no random sign. 1: RuleB and random sign. 2: RuleB and no random sign
-#define RANDOMNESS 0
+#define RANDOMNESS 1
 // Tipo de inicializacion de grilla: 1 = RANDOM, 2 = HOT CENTER, 3 = COLD CENTER, 4 = COLD VS HOT BLOPS
-#define INIT_TYPE 4
+#define INIT_TYPE 1
 // Numero de threads
 #define NUM_THREADS 4
 

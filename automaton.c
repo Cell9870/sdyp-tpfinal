@@ -9,7 +9,9 @@
 /* SECUENCIAL */
 int main (int argc, char** argv) {
 
-    double time_spent = 0.0;
+    time_t time_spent_seconds;
+    time(&time_spent_seconds);
+    double time_spent_clock = 0.0;
     clock_t begin = clock();
     
     Node** grid = (Node**) malloc(HEIGHT * sizeof(Node*));
@@ -29,10 +31,10 @@ int main (int argc, char** argv) {
     while (finish < ITERATIONS) {
         if (!PERFORMANCE_MODE) {
             printf("Ciclo %d.\n", finish+1);
-            if (finish < 2) {
+            /*if (finish < 2) {
                 fflush(stdin);
                 getchar();
-            }
+            }*/
         }
 
         applyRulesGrid(grid, gridAux);
@@ -44,8 +46,11 @@ int main (int argc, char** argv) {
 
 
     clock_t end = clock();
-    time_spent += (double)(end - begin) / CLOCKS_PER_SEC;
-    printf("Tiempo de Ejecucion: %lf segundos.", time_spent);
+    time_spent_clock += (double)(end - begin) / CLOCKS_PER_SEC;
+    printf("\033[32mTiempo de Ejecucion: %lf segundos.\n\033[0m", time_spent_clock);
+    time_t time_end;
+    time(&time_end);
+    printf("\033[32mTiempo de Ejecucion Total Con Time: %ld segundos.\n\033[0m", (time_end - time_spent_seconds));
 
     for (int i = 0; i < HEIGHT; i++)
         free(grid[i]);

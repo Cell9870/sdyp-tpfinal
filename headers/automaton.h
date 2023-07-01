@@ -6,15 +6,15 @@ typedef struct {
 } Node;
 
 // 1: No mostrar grilla, 0: Mostrar grilla.
-#define PERFORMANCE_MODE 0
+#define PERFORMANCE_MODE 1
 // 1: Activar comentarios, 0: No mostrar ayudas.
 #define DEV_MODE 0
 // Número de iteraciones 
-#define ITERATIONS 500
+#define ITERATIONS 1
 // Cantidad de columnas en la grilla (columns)
-#define WIDTH 35
+#define WIDTH 1000
 // Cantidad de filas en la grilla (rows)
-#define HEIGHT 35
+#define HEIGHT 1000
 
 //Rango de Moore
 #define MOORE_RANGE 2   

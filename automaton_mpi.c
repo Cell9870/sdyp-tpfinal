@@ -18,13 +18,9 @@ int main (int argc, char** argv) {
     MPI_Comm_size(MPI_COMM_WORLD, &size);
     MPI_Comm_rank(MPI_COMM_WORLD, &rank);
     
-    time_t time_spent2;
-
-    if (rank == 0) {
-        time(&time_spent2);
-    }
-
-    double time_spent = 0.0;
+    time_t time_spent_seconds;
+    if (rank == 0) time(&time_spent_seconds);
+    double time_spent_clock = 0.0;
     clock_t myBegin = clock();
 
     srand(time(NULL));
@@ -54,32 +50,36 @@ int main (int argc, char** argv) {
     while(iteration < ITERATIONS) {
         if (rank == 0 && !PERFORMANCE_MODE && !DEV_MODE) {
             printf("Ciclo %d.\n", iteration+1);
-        //    if (iteration < 3) {
-        //        fflush(stdin);
-        //        getchar();
-        //    }
+            /*if (iteration < 3) {
+                fflush(stdin);
+                getchar();
+            }*/
         }
         MPI_Barrier(MPI_COMM_WORLD);
-        
+
         divideAndSendGrid(grid, rank, size, mpi_node_type, myRows, myRange, gridAux);
-        if (PERFORMANCE_MODE) printTimeSpent(&myBegin, rank, iteration, 0, &time_spent);
+        if (0 < PERFORMANCE_MODE && PERFORMANCE_MODE < 4) printTimeSpent(&myBegin, rank, iteration, 0, &time_spent_clock);
         MPI_Barrier(MPI_COMM_WORLD);
 
         applyRulesGrid(grid, gridAux, rank, size, myRows, myRange);
-        if (PERFORMANCE_MODE) printTimeSpent(&myBegin, rank, iteration, 1, &time_spent);
+        if (0 < PERFORMANCE_MODE && PERFORMANCE_MODE < 4) printTimeSpent(&myBegin, rank, iteration, 1, &time_spent_clock);
         MPI_Barrier(MPI_COMM_WORLD);
-        
+
         updateGrid(grid, gridAux, rank, size, myRows, myRange, mpi_node_type);
-        if (PERFORMANCE_MODE) printTimeSpent(&myBegin, rank, iteration, 2, &time_spent);
+        if (0 < PERFORMANCE_MODE && PERFORMANCE_MODE < 4) printTimeSpent(&myBegin, rank, iteration, 2, &time_spent_clock);
         MPI_Barrier(MPI_COMM_WORLD);
         if (!DEV_MODE && !PERFORMANCE_MODE && rank == 0) showGrid(grid);
         iteration++;
     }
 
     clock_t myEnd = clock();
-    time_spent += (double)(myEnd - myBegin) / CLOCKS_PER_SEC;
-    if (rank == 0) printf("\033[32mTiempo de Ejecucion Total: %lf segundos.\n\033[0m", time_spent);
-    
+    time_spent_clock += (double)(myEnd - myBegin) / CLOCKS_PER_SEC;
+    if (rank == 0) printf("\033[32mTiempo de Ejecucion Total: %lf segundos.\n\033[0m", time_spent_clock);
+    if (rank == 0) {
+        time_t time_end;
+        time(&time_end);
+        printf("\033[32mTiempo de Ejecucion Total Con Time: %ld segundos.\n\033[0m", (time_end - time_spent_seconds));
+    }
     for (int i = 0; i < HEIGHT; i++)
         free(grid[i]);
     free(grid);
@@ -89,13 +89,6 @@ int main (int argc, char** argv) {
     free(gridAux);
     
     MPI_Type_free(&mpi_node_type);
-
-    if (rank == 0) {
-        time_t time_end;
-        time(&time_end);
-        printf("\033[32mTiempo de Ejecucion Total Con Time: %ld segundos.\n\033[0m", (time_end - time_spent2));
-    }
-
     MPI_Finalize();
 
     return 0;
@@ -439,7 +432,7 @@ void printTimeSpent(clock_t *myBegin, int rank, int iteration, int task, double 
     time_iteration = (double)(myEnd - *myBegin) / CLOCKS_PER_SEC;
 
     if ((PERFORMANCE_MODE == 2 && rank == 0) || (PERFORMANCE_MODE == 3 && iteration == (ITERATIONS-1) && rank == 0) || PERFORMANCE_MODE == 1) {
-        if (CLUSTER) {
+        /*//if (CLUSTER) {
             switch (task) {
                     case 0:
                         if (rank == 0) printf("Iteracion %5d: MASTER   (%2d), tardo %11lf segundos en dividir la grilla.\n", iteration+1, rank, time_iteration);
@@ -453,7 +446,7 @@ void printTimeSpent(clock_t *myBegin, int rank, int iteration, int task, double 
                     default: break;
                 }
             //if (iteration == (ITERATIONS - 1) && task == 2 && rank == 0) printf("\033[32mTiempo de Ejecucion Total: %lf segundos.\n\033[0m", *time_spent);
-        } else {
+        *///} else {
             switch (task) {
                     case 0:
                         if (rank == 0) printf("Iteracion %5d: \033[31mMASTER\033[0m   (%2d), tardo %11lf segundos en dividir la grilla.\n", iteration+1, rank, time_iteration);
@@ -466,7 +459,7 @@ void printTimeSpent(clock_t *myBegin, int rank, int iteration, int task, double 
                         ; break;
                     default: break;
                 }
-            }
+        //    }
         //if (iteration == (ITERATIONS - 1) && task == 2 && rank == 0) printf("\033[32mTiempo de Ejecucion Total: %lf segundos.\n\033[0m", *time_spent);
     }
     *myBegin = myEnd;
