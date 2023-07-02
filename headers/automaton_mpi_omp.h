@@ -7,17 +7,16 @@ typedef struct {
     short sign;             // Variable que puede ser 1 o -1
 } Node;
 
-
 // 0: Mostrar grilla; 1: No mostrar grilla, mostrar timings; 2: Solo timings de MASTER; 3: Solo timings iteracion final de MASTER; 4: No mostrar timings
 #define PERFORMANCE_MODE 4
 // 0: No mostrar ayudas, 1: Activar comentarios.
 #define DEV_MODE 0
 // Número de iteraciones 
-#define ITERATIONS 1
+#define ITERATIONS 25
 // Cantidad de columnas en la grilla (columns)
-#define WIDTH 1000
+#define WIDTH 5000
 // Cantidad de filas en la grilla (rows)
-#define HEIGHT 1000
+#define HEIGHT 5000
 
 // Rango de Moore
 #define MOORE_RANGE 2
