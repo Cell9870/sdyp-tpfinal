@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include "./headers/automaton_mpi_omp.h"
 #include <math.h>
+#include <stddef.h>
 #include <stdlib.h>
 #include <time.h>
 
