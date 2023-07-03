@@ -1,0 +1,2 @@
+Tiempo de Ejecucion: 10.034754 segundos.
+Tiempo de Ejecucion Total Con Time: 10 segundos.
